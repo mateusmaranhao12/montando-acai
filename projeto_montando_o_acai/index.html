@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monte seu açaí</title>
+
+    <!--CSS-->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- VUE -->
+    <script src="/js/vue.js"></script>
+
+    <!--Bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container">
+            <h2>Monte seu açaí</h2>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div id="app">
+
+            <div class="row">
+                
+                <div class="col-md-6">
+                    <div class="row mt-2">
+                        <div class="col">
+                            <img :src="fruta">
+                            <img :src="cobertura">
+                            <img :src="acai[0]">
+                            <img :src="leiteCondensado">
+                            <img :src="leiteEmPo">
+                            <img :src="Ganache">
+                            <img :src="acai[1]">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6" v-if="etapa == 1">
+
+                    <!--Tipo de açaí-->
+
+                    <div class="row mt-2">
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-header">
+                                  Tipo de açaí
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" value="acai_puro" v-model="inputTipoAcai">
+                                        <label class="form-check-label">
+                                          Açaí puro
+                                        </label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" value="acai_com_nutella" v-model="inputTipoAcai">
+                                        <label class="form-check-label">
+                                          Açaí com Nutella
+                                        </label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" value="acai_com_leite_ninho" v-model="inputTipoAcai">
+                                        <label class="form-check-label">
+                                          Açaí com Leite Ninho
+                                        </label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" value="acai_com_morango" v-model="inputTipoAcai">
+                                        <label class="form-check-label">
+                                          Açaí com Morango
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Fruta-->
+
+                    <div class="row mt-2">
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-header">
+                                  Fruta
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" value="morango" v-model="inputFruta">
+                                        <label class="form-check-label">
+                                          Morango
+                                        </label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" value="banana" v-model="inputFruta">
+                                        <label class="form-check-label">
+                                          Banana
+                                        </label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" value="kiwi" v-model="inputFruta">
+                                        <label class="form-check-label">
+                                          Kiwi
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Cobertura-->
+
+                    <div class="row mt-2">
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-header">
+                                  Cobertura
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" value="cobertura_chocolate" v-model="inputCobertura">
+                                        <label class="form-check-label">
+                                          Chocolate
+                                        </label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" value="cobertura_morango" v-model="inputCobertura">
+                                        <label class="form-check-label">
+                                          Morango
+                                        </label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" value="cobertura_caramelo" v-model="inputCobertura">
+                                        <label class="form-check-label">
+                                          Caramelo
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Complementos-->
+
+                    <div class="row mt-2">
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-header">
+                                  Adicionais
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" value="leite_condensado" v-model="inputAdicionais">
+                                        <label class="form-check-label">
+                                          Leite Condensado
+                                        </label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" value="leite_em_po" v-model="inputAdicionais">
+                                        <label class="form-check-label">
+                                          Leite em pó
+                                        </label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="checkbox" value="ganache" v-model="inputAdicionais">
+                                        <label class="form-check-label">
+                                          Ganache
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-2">
+                        <div class="col d-flex justify-content-end">
+                            <button type="button" class="btn btn-success" @click="fazerPedido()">Fazer pedido</button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-6" v-if="etapa == 2">
+
+                    <div class="row mt-2">
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-header">
+                                  Informe seus dados
+                                </div>
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <label class="form-label">Nome: </label>
+                                        <input type="text" class="form-control" v-model="inputNome">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Endereço: </label>
+                                        <input type="text" class="form-control" v-model="inputEndereco">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col d-flex justify-content-between">
+                            <button type="button" class="btn btn-primary" @click="etapa -= 1">Voltar para o açaí</button>
+                            <button type="button" class="btn btn-success" @click="confirmarPedido()">Confirmar</button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-6" v-if="etapa == 3">
+                    <div class="row mt-2">
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-header text-success">
+                                    <h1>PEDIDO CONFIRMADO</h1>
+                                </div>
+                                <div class="card-body">
+                                    <p>Seu pedido está a caminho!</p>
+                                    <p>Vamos chamar você em breve</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col d-flex justify-content-between">
+                            <button type="button" class="btn btn-secondary" @click="etapa = 1">Repetir Pedido</button>
+                            <button type="button" class="btn btn-dark" @click="novoPedido()">Fazer novo pedido</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!--JS-->
+
+    <script>
+
+        const vm = new Vue({
+
+            el: '#app',
+            data: {
+                inputTipoAcai: '',
+                inputFruta: '',
+                inputCobertura: '',
+                inputAdicionais: [],
+                etapa: 1,
+                inputNome: '',
+                inputEndereco: '',
+                novoPedidoAssincrono: null
+            },
+            computed: {
+
+                acai() {
+                    switch(this.inputTipoAcai) {
+
+                        case 'acai_puro':
+                            return ['img/acai_meio_puro.png', 'img/acai_puro_inferior.png']
+
+                        case 'acai_com_nutella': 
+                            return ['img/acai_meio_nutella.png', 'img/acai_com_nutella_inferior.png']
+
+                        case 'acai_com_leite_ninho':
+                            return ['img/acai_meio_leite_ninho.png', 'img/acai_leite_ninho_inferior.png']
+                        
+                        case 'acai_com_morango':
+                            return ['img/acai_meio_morango.png', 'img/acai_morango_inferior.png']
+                        
+                        default:
+                            return ['img/padrao/acai_meio.png', 'img/padrao/acai_inferior.png']
+
+                    }
+                },
+
+                fruta() {
+                    
+                    switch(this.inputFruta) {
+
+                        case 'morango':
+                            return 'img/morango.png'
+                        
+                        case 'banana':
+                            return 'img/banana.png'
+
+                        case 'kiwi':
+                            return 'img/kiwi.png'
+
+                        default:
+                            return 'img/padrao/fruta.png'
+
+                    }
+                    
+                },
+
+                cobertura() {
+
+                    switch(this.inputCobertura) {
+
+                        case 'cobertura_chocolate':
+                            return 'img/cobertura_chocolate.png'
+
+                        case 'cobertura_morango':
+                            return 'img/cobertura_morango.png'
+
+                        case 'cobertura_caramelo':
+                            return 'img/cobertura_caramelo.png'
+
+                        default:
+                            return 'img/padrao/cobertura.png' 
+
+                    }
+
+                },
+
+                leiteCondensado() {
+
+                    if (this.inputAdicionais.includes('leite_condensado')) {
+                        return 'img/leite_condensado.png'
+                    } else {
+                        return 'img/padrao/adicional.png'
+                    }
+                    
+                },
+
+                leiteEmPo() {
+
+                    if (this.inputAdicionais.includes('leite_em_po')) {
+                        return 'img/leite_em_po.png'
+                    } else {
+                        return 'img/padrao/adicional.png'
+                    }
+
+                },
+
+                Ganache() {
+
+                    if (this.inputAdicionais.includes('ganache')) {
+                        return 'img/ganache.png'
+                    } else {
+                        return 'img/padrao/adicional.png'
+                    }
+
+                },
+
+            },
+
+            methods: {
+
+                fazerPedido() {
+                    
+                    if (this.inputTipoAcai) {
+                        this.etapa = 2
+                    } else {
+                        alert('Selecione algum açaí')
+                    }
+
+                },
+
+                confirmarPedido() {
+
+                    if (this.inputNome && this.inputEndereco) {
+                        this.etapa = 3
+                    } else {
+                        alert('Preencha todos os campos!')
+                    }
+
+                    this.novoPedidoAssincrono = setTimeout(() => this.novoPedido(), 7000)
+                    
+                },
+
+                novoPedido() {
+
+                    this.inputTipoAcai = '',
+                    this.inputFruta = '',
+                    this.inputCobertura = '',
+                    this.inputAdicionais = [],
+                    this.etapa = 1,
+                    this.inputNome = '',
+                    this.inputEndereco = ''
+
+                }
+
+            },
+
+            watch: {
+
+                etapa(novoValor) {
+                    if (novoValor == 1) {
+                        clearTimeout(this.novoPedidoAssincrono)
+                    }
+                }
+                
+            }
+        })
+
+    </script>
+
+</body>
+</html>

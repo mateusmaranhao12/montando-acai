@@ -1,0 +1,11 @@
+.navbar {
+    background-color: rgb(153, 0, 255);
+}
+
+.navbar h2 {
+    color: white;
+}
+
+.text-success h1 {
+    font-weight: bold;
+}
